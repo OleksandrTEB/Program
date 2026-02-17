@@ -1,26 +1,26 @@
-﻿namespace praca
+namespace praca
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            //zadanie1();
-            //zadanie2();
-            //zadanie3();
-            //zadanie4();
-            //zadanie5();
-            //zadanie6();
-            //zadanie7();
-            //zadanie8();
-            //zadanie9();
-            //zadanie10();
-            //zadanie11();
-            //zadanie12();
-            //zadanie13();
-            //zadanie14();
-            //zadanie15();
-            //zadanie16();
-            //zadanie17();
+            zadanie1();
+            zadanie2();
+            zadanie3();
+            zadanie4();
+            zadanie5();
+            zadanie6();
+            zadanie7();
+            zadanie8();
+            zadanie9();
+            zadanie10();
+            zadanie11();
+            zadanie12();
+            zadanie13();
+            zadanie14();
+            zadanie15();
+            zadanie16();
+            zadanie17();
             zadanie18();
 
             Console.ReadLine();
@@ -50,8 +50,10 @@
             }
             else if (result == 3)
             {
-                string firstUpper = input.Substring(1, 1).ToUpper();
-                Console.WriteLine(firstUpper + input);
+                string newString = "";
+                newString += input.Substring(0, 1).ToUpper();
+                newString += input.Substring(1, input.Length -1);
+                Console.WriteLine(newString);
             }
 
             Console.WriteLine();
@@ -220,9 +222,9 @@
             string[] words = input.Split(' ');
             bool dotTheLast = false;
 
-            for(int i = 0; i < words.Length; i++)
+            for (int i = 0; i < words.Length; i++)
             {
-                for(int j = 0; j < cenzure.Length; j++)
+                for (int j = 0; j < cenzure.Length; j++)
                 {
                     if (words[i].IndexOf(".") != -1)
                     {
@@ -234,7 +236,7 @@
                     {
                         string newWord = "";
 
-                        for(int k = 0; k < words[i].Length; k++)
+                        for (int k = 0; k < words[i].Length; k++)
                         {
                             newWord += '*';
                         }
@@ -289,7 +291,7 @@
 
             if (words.Contains(searchingWord))
             {
-                Console.WriteLine("Znaleziono na indeksie: " + words.IndexOf(searchingWord));
+                Console.WriteLine("Znaleziono na indeksie: " + Array.IndexOf(words, searchingWord));
             }
             else
             {
@@ -310,11 +312,11 @@
 
             string newFirstName = "";
             newFirstName += names[0].Substring(0, 1).ToUpper();
-            newFirstName += names[0].Substring(1, names[0].Length -1).ToLower();
+            newFirstName += names[0].Substring(1, names[0].Length - 1).ToLower();
 
             string newSecondName = "";
             newSecondName += names[1].Substring(0, 1).ToUpper();
-            newSecondName += names[1].Substring(1, names[1].Length -1).ToLower();
+            newSecondName += names[1].Substring(1, names[1].Length - 1).ToLower();
 
             Console.WriteLine("Result: " + newFirstName + " " + newSecondName);
 
@@ -360,7 +362,7 @@
             Console.Write("Wpisz dowolne zdanie: ");
             string input = Console.ReadLine().Trim();
             string[] words = input.Split(' ');
-            string[] newWords  = new string[words.Length];
+            string[] newWords = new string[words.Length];
 
             for (int i = 0; i < words.Length; i++)
             {
@@ -408,7 +410,7 @@
             int counterSpulGloski = 0;
 
             char[] samoGloski = ['a', 'ą', 'e', 'ę', 'i', 'o', 'ó', 'u', 'y'];
-            char[] spulGloski = ['b', 'c', 'ć', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ł', 
+            char[] spulGloski = ['b', 'c', 'ć', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ł',
                 'm', 'n', 'ń', 'p', 'r', 's', 'ś', 't', 'w', 'z', 'ź', 'ż'];
 
             for (int i = 0; i < words.Length; i++)
@@ -470,7 +472,7 @@
                         continue;
                     }
 
-                    int index = alfabet.IndexOf(words[i][j]);
+                    int index = Array.IndexOf(alfabet, words[i][j]);
                     if (index >= 0)
                     {
                         int indexInAlfabet = index + key;
