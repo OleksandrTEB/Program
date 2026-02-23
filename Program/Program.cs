@@ -4,23 +4,23 @@ namespace praca
     {
         static void Main(string[] args)
         {
-            zadanie1();
-            zadanie2();
-            zadanie3();
-            zadanie4();
-            zadanie5();
-            zadanie6();
-            zadanie7();
-            zadanie8();
-            zadanie9();
-            zadanie10();
-            zadanie11();
-            zadanie12();
-            zadanie13();
-            zadanie14();
-            zadanie15();
-            zadanie16();
-            zadanie17();
+            //zadanie1();
+            //zadanie2();
+            //zadanie3();
+            //zadanie4();
+            //zadanie5();
+            //zadanie6();
+            //zadanie7();
+            //zadanie8();
+            //zadanie9();
+            //zadanie10();
+            //zadanie11();
+            //zadanie12();
+            //zadanie13();
+            //zadanie14();
+            //zadanie15();
+            //zadanie16();
+            //zadanie17();
             zadanie18();
 
             Console.ReadLine();
@@ -52,7 +52,7 @@ namespace praca
             {
                 string newString = "";
                 newString += input.Substring(0, 1).ToUpper();
-                newString += input.Substring(1, input.Length -1);
+                newString += input.Substring(1, input.Length - 1);
                 Console.WriteLine(newString);
             }
 
@@ -450,6 +450,9 @@ namespace praca
         {
             Console.WriteLine("Zadanie 18");
 
+            Console.Write("Czy używać polski alfabet? 1 = tak, 2 = nie: ");
+            int polish = int.Parse(Console.ReadLine());
+
             Console.Write("Wpisz dowolne zdanie: ");
             string input = Console.ReadLine().Trim();
 
@@ -458,32 +461,45 @@ namespace praca
 
             string[] words = input.Split(' ');
             string newString = "";
-            char[] alfabet = ['a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g',
-                'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p', 'r',
-                's', 'ś', 't', 'u', 'w', 'y', 'z', 'ź', 'ż'];
+            char[] alfabet = new char[32];
+
+            if (polish == 1)
+            {
+                alfabet = ['a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę',
+                    'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm',
+                    'n', 'ń', 'o', 'ó', 'p', 'r', 's', 'ś', 't', 'u',
+                    'w', 'y', 'z', 'ź', 'ż'];
+            }
+            else
+            {
+                alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+                    'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+                    'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+            }
+
 
             for (int i = 0; i < words.Length; i++)
             {
                 for (int j = 0; j < words[i].Length; j++)
                 {
-                    if (words[i][j] == ' ')
+                    int index = Array.IndexOf(alfabet, words[i][j]);
+
+                    int indexInAlfabet = index + key;
+
+                    if (indexInAlfabet > (alfabet.Length - 1))
                     {
-                        newString += ' ';
-                        continue;
+                        indexInAlfabet -= alfabet.Length;
                     }
 
-                    int index = Array.IndexOf(alfabet, words[i][j]);
-                    if (index >= 0)
-                    {
-                        int indexInAlfabet = index + key;
-                        newString += alfabet[indexInAlfabet];
-                    }
+                    newString += alfabet[indexInAlfabet];
                 }
+
+                newString += ' ';
             }
 
             Console.WriteLine();
 
-            Console.WriteLine("Resultat:" + newString);
+            Console.WriteLine("Resultat: " + newString);
 
             Console.WriteLine();
         }
