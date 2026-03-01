@@ -450,6 +450,9 @@ namespace praca
         {
             Console.WriteLine("Zadanie 18");
 
+            Console.Write("Szyfrowanie = 1, desyfrowanie = 2: ");
+            int szyfrowac = int.Parse(Console.ReadLine());
+
             Console.Write("Czy używać polski alfabet? 1 = tak, 2 = nie: ");
             int polish = int.Parse(Console.ReadLine());
 
@@ -477,24 +480,47 @@ namespace praca
                     'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
             }
 
-
-            for (int i = 0; i < words.Length; i++)
+            if(szyfrowac == 1)
             {
-                for (int j = 0; j < words[i].Length; j++)
+                for (int i = 0; i < words.Length; i++)
                 {
-                    int index = Array.IndexOf(alfabet, words[i][j]);
-
-                    int indexInAlfabet = index + key;
-
-                    if (indexInAlfabet > (alfabet.Length - 1))
+                    for (int j = 0; j < words[i].Length; j++)
                     {
-                        indexInAlfabet -= alfabet.Length;
+                        int index = Array.IndexOf(alfabet, words[i][j]);
+
+                        int indexInAlfabet = index + key;
+
+                        if (indexInAlfabet > (alfabet.Length - 1))
+                        {
+                            indexInAlfabet -= alfabet.Length;
+                        }
+
+                        newString += alfabet[indexInAlfabet];
                     }
 
-                    newString += alfabet[indexInAlfabet];
+                    newString += ' ';
                 }
+            }
+            else
+            {
+                for (int i = 0; i < words.Length; i++)
+                {
+                    for (int j = 0; j < words[i].Length; j++)
+                    {
+                        int index = Array.IndexOf(alfabet, words[i][j]);
 
-                newString += ' ';
+                        int indexInAlfabet = index - key;
+
+                        if (indexInAlfabet > (alfabet.Length - 1))
+                        {
+                            indexInAlfabet += alfabet.Length;
+                        }
+
+                        newString += alfabet[indexInAlfabet];
+                    }
+
+                    newString += ' ';
+                }
             }
 
             Console.WriteLine();
