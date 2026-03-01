@@ -453,73 +453,73 @@ namespace praca
             Console.Write("Szyfrowanie = 1, desyfrowanie = 2: ");
             int szyfrowac = int.Parse(Console.ReadLine());
 
-            Console.Write("Czy używać polski alfabet? 1 = tak, 2 = nie: ");
-            int polish = int.Parse(Console.ReadLine());
-
             Console.Write("Wpisz dowolne zdanie: ");
-            string input = Console.ReadLine().Trim();
+            string input = Console.ReadLine();
 
-            Console.Write("Podaj klucz: ");
-            int key = int.Parse(Console.ReadLine());
-
-            string[] words = input.Split(' ');
             string newString = "";
-            char[] alfabet = new char[32];
-
-            if (polish == 1)
-            {
-                alfabet = ['a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę',
-                    'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm',
-                    'n', 'ń', 'o', 'ó', 'p', 'r', 's', 'ś', 't', 'u',
-                    'w', 'y', 'z', 'ź', 'ż'];
-            }
-            else
-            {
-                alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+            char[] alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
                     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
                     'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-            }
 
-            if(szyfrowac == 1)
+            Console.Write("Podaj klucz, max " + (alfabet.Length - 1) + ": ");
+            int key = int.Parse(Console.ReadLine()) % alfabet.Length;
+
+            if (szyfrowac == 1)
             {
-                for (int i = 0; i < words.Length; i++)
+                for (int i = 0; i < input.Length; i++)
                 {
-                    for (int j = 0; j < words[i].Length; j++)
+                    int index = Array.IndexOf(alfabet, char.ToLower(input[i]));
+
+                    if(index == -1)
                     {
-                        int index = Array.IndexOf(alfabet, words[i][j]);
-
-                        int indexInAlfabet = index + key;
-
-                        if (indexInAlfabet > (alfabet.Length - 1))
-                        {
-                            indexInAlfabet -= alfabet.Length;
-                        }
-
-                        newString += alfabet[indexInAlfabet];
+                        newString += input[i];
+                        continue;
                     }
 
-                    newString += ' ';
+                    bool isUpper = false;
+
+                    if (char.IsUpper(input[i]))
+                    {
+                        isUpper = true;
+                    }
+
+                    int indexInAlfabet = index + key;
+
+                    if (indexInAlfabet > (alfabet.Length - 1))
+                    {
+                        indexInAlfabet -= alfabet.Length;
+                    }
+
+                    newString += isUpper ? char.ToUpper(alfabet[indexInAlfabet]) : alfabet[indexInAlfabet];
                 }
             }
             else
             {
-                for (int i = 0; i < words.Length; i++)
+                for (int i = 0; i < input.Length; i++)
                 {
-                    for (int j = 0; j < words[i].Length; j++)
+                    int index = Array.IndexOf(alfabet, char.ToLower(input[i]));
+
+                    if (index == -1)
                     {
-                        int index = Array.IndexOf(alfabet, words[i][j]);
-
-                        int indexInAlfabet = index - key;
-
-                        if (indexInAlfabet > (alfabet.Length - 1))
-                        {
-                            indexInAlfabet += alfabet.Length;
-                        }
-
-                        newString += alfabet[indexInAlfabet];
+                        newString += input[i];
+                        continue;
                     }
 
-                    newString += ' ';
+                    bool isUpper = false;
+
+                    if (char.IsUpper(input[i]))
+                    {
+                        isUpper = true;
+                    }
+
+                    int indexInAlfabet = index - key;
+
+                    if (indexInAlfabet < 0)
+                    {
+                        indexInAlfabet += alfabet.Length;
+                    }
+
+                    newString += isUpper ? char.ToUpper(alfabet[indexInAlfabet]) : alfabet[indexInAlfabet];
                 }
             }
 
